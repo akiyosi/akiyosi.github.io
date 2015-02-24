@@ -5,17 +5,17 @@
   
   <title>vimで逆方向の行削除コマンドを作る | 眠ってる場合じゃない</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="vimでは ddコマンドで現在オンカーソルな行を削除できる。[count]ddとキータイプすれば現在行含みcount下の行まで一気に削除できて、すごい便利です。僕は仕事柄あまりコーディングする機会は多くなおのですが、膨大なデータファイルを扱うことがままあり、その際に[count]ddライクな行削除を逆方向（オンカーソル行から上方向）に実行できたらいいのにな、と常々考えていて、今回、vimスクリプト">
+  <meta name="description" content="vimでは ddコマンドで現在オンカーソルな行を削除できます。[count]dd とキータイプすれば現在行含み count下の行まで一気に削除できて便利です。僕は仕事柄膨大な行数のデータファイルを扱うことがままあり、その際に [count]dd はよく使用しているのですが、[count]ddライクに上方向にも行削除もできたらなぁ、とよく考えていました。そこで今回、vimスクリプトの勉強も兼ねて実装">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vimで逆方向の行削除コマンドを作る">
 <meta property="og:url" content="http://akiyosi.github.io/2015/02/23/vim-reverse-delete/">
 <meta property="og:site_name" content="眠ってる場合じゃない">
-<meta property="og:description" content="vimでは ddコマンドで現在オンカーソルな行を削除できる。[count]ddとキータイプすれば現在行含みcount下の行まで一気に削除できて、すごい便利です。僕は仕事柄あまりコーディングする機会は多くなおのですが、膨大なデータファイルを扱うことがままあり、その際に[count]ddライクな行削除を逆方向（オンカーソル行から上方向）に実行できたらいいのにな、と常々考えていて、今回、vimスクリプト">
+<meta property="og:description" content="vimでは ddコマンドで現在オンカーソルな行を削除できます。[count]dd とキータイプすれば現在行含み count下の行まで一気に削除できて便利です。僕は仕事柄膨大な行数のデータファイルを扱うことがままあり、その際に [count]dd はよく使用しているのですが、[count]ddライクに上方向にも行削除もできたらなぁ、とよく考えていました。そこで今回、vimスクリプトの勉強も兼ねて実装">
 <meta property="og:image" content="/2015/02/23/vim-reverse-delete/a5abeeafef5dd37793bcb5cddbad35e9.gif">
 <meta property="og:image" content="/2015/02/23/vim-reverse-delete/62365e1eac6d427f5ad377e4139e4a97.gif">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vimで逆方向の行削除コマンドを作る">
-<meta name="twitter:description" content="vimでは ddコマンドで現在オンカーソルな行を削除できる。[count]ddとキータイプすれば現在行含みcount下の行まで一気に削除できて、すごい便利です。僕は仕事柄あまりコーディングする機会は多くなおのですが、膨大なデータファイルを扱うことがままあり、その際に[count]ddライクな行削除を逆方向（オンカーソル行から上方向）に実行できたらいいのにな、と常々考えていて、今回、vimスクリプト">
+<meta name="twitter:description" content="vimでは ddコマンドで現在オンカーソルな行を削除できます。[count]dd とキータイプすれば現在行含み count下の行まで一気に削除できて便利です。僕は仕事柄膨大な行数のデータファイルを扱うことがままあり、その際に [count]dd はよく使用しているのですが、[count]ddライクに上方向にも行削除もできたらなぁ、とよく考えていました。そこで今回、vimスクリプトの勉強も兼ねて実装">
 <meta name="twitter:creator" content="@https://twitter.com/akjyosj">
 
   
@@ -134,7 +134,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>vimでは ddコマンドで現在オンカーソルな行を削除できる。<br>[count]ddとキータイプすれば現在行含みcount下の行まで一気に削除できて、すごい便利です。僕は仕事柄あまりコーディングする機会は多くなおのですが、膨大なデータファイルを扱うことがままあり、その際に[count]ddライクな行削除を逆方向（オンカーソル行から上方向）に実行できたらいいのにな、と常々考えていて、今回、vimスクリプトの勉強も兼ねて実装にチャレンジしてみました。</p>
+        <p>vimでは ddコマンドで現在オンカーソルな行を削除できます。<br>[count]dd とキータイプすれば現在行含み count下の行まで一気に削除できて便利です。僕は仕事柄膨大な行数のデータファイルを扱うことがままあり、その際に [count]dd はよく使用しているのですが、[count]ddライクに上方向にも行削除もできたらなぁ、とよく考えていました。そこで今回、vimスクリプトの勉強も兼ねて実装にチャレンジしてみました。</p>
 <h3 id="実装">実装</h3>
 <p>ddの動作イメージから、以下のように動くことを目標とします。</p>
 <ul>
@@ -142,14 +142,14 @@
 <li>[count]「キー」でオンカーソル行含め上方向count行分を削除</li>
 <li>[count] 指定での操作で1行目まで削除したら、それ以上は削除しない。</li>
 </ul>
-<p>そこで以下のようにスクリプトを組みました。</p>
+<p>以下のように vimスクリプトを組みました。</p>
 <figure class="highlight vim-script"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>! <span class="title">ReverseDelete</span><span class="params">(count)</span></span></div><div class="line">     let c = v:count1</div><div class="line">     let lnum = line(<span class="string">'.'</span>)</div><div class="line">     <span class="keyword">if</span> c &gt; lnum</div><div class="line"> 	    let c = lnum</div><div class="line">     endif</div><div class="line"></div><div class="line">     execute <span class="string">"normal!"</span> (lnum - c + <span class="number">1</span>) <span class="string">"k"</span></div><div class="line">     execute <span class="string">"normal!"</span> c <span class="string">"dd"</span></div><div class="line"><span class="function"><span class="keyword">endfunction</span></span></div></pre></td></tr></table></figure>
 
-<p>以下のようにキーマップします。</p>
+<p>この関数を &lt;Space&gt;ddキーにキーマップします。</p>
 <figure class="highlight key-map"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nnoremap &lt;<span class="constant">Space</span>&gt;dd <span class="symbol">:&lt;C-u&gt;call</span> <span class="constant">ReverseDelete</span>(<span class="symbol">v:</span>count1)&lt;<span class="constant">CR</span>&gt;</div></pre></td></tr></table></figure>
 
-<p>動かしてみます！ 4&lt;Space&gt;dd っと<br><img src="/2015/02/23/vim-reverse-delete/a5abeeafef5dd37793bcb5cddbad35e9.gif" alt="" title="vim 逆方向行削除"></p>
-<p>動きました！感動です。初めてにしては上出来では。。<br>ここで満足しかけたのですが、上記の実装では vimの便利機能であるドット”.”による操作の繰り返しができませんでした。これは不便です。なんとかドットリピート対応をしたい。</p>
+<p>実際に動かしてみます。4&lt;Space&gt;ddと入力します。<br><img src="/2015/02/23/vim-reverse-delete/a5abeeafef5dd37793bcb5cddbad35e9.gif" alt="" title="vim 逆方向行削除"></p>
+<p>動きました！1行目や最終行にオンカーソルな状態でも期待通り動作します！<br>ここで満足しかけたのですが、上記の実装では vimの便利機能であるドット”.”キーによる操作の繰り返しができませんでした。これは不便です。なんとかドットリピート対応したい。</p>
 <h3 id="ドットで繰り返せるようにする">ドットで繰り返せるようにする</h3>
 <p>Vim script テクニックバイブルとかウェブの情報とか色々調べたところ、delisさんの以下の記事に行き当たりました。</p>
 <p> <a href="http://deris.hatenablog.jp/entry/20130404/1365086716" target="_blank" rel="external">空行を挿入する+α - derisの日記</a></p>
@@ -165,7 +165,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://akiyosi.github.io/2015/02/23/vim-reverse-delete/" data-id="8c72ugnimzicpi5w" class="article-share-link">Share</a>
+        <a data-url="http://akiyosi.github.io/2015/02/23/vim-reverse-delete/" data-id="jlmw5tbbee7feuhl" class="article-share-link">Share</a>
       
 
       
