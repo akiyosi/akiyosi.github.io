@@ -148,6 +148,7 @@
 <p>この関数を &lt;Space&gt;ddキーにキーマップします。</p>
 <figure class="highlight key-map"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nnoremap &lt;<span class="constant">Space</span>&gt;dd <span class="symbol">:&lt;C-u&gt;call</span> <span class="constant">ReverseDelete</span>(<span class="symbol">v:</span>count1)&lt;<span class="constant">CR</span>&gt;</div></pre></td></tr></table></figure>
 
+<h1 id="_"> </h1>
 <h3 id="動作">動作</h3>
 <p>実際に動かしてみます。4&lt;Space&gt;ddと入力します。<br><img src="/2015/02/23/vim-reverse-delete/a5abeeafef5dd37793bcb5cddbad35e9.gif" alt="" title="vim 逆方向行削除"></p>
 <p>動きました！1行目や最終行にオンカーソルな状態でも期待通り動作します！<br>ここで満足しかけたのですが、上記の実装では vimの便利機能であるドット”.”キーによる操作の繰り返しができませんでした。これは不便です。なんとかドットリピート対応したい。</p>
