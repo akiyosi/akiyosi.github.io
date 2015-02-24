@@ -448,6 +448,9 @@ body {
 #header-title .my-socials li .email {
   background-color: #ffd700;
 }
+#header-title .my-socials li .twitter {
+  background-color: #55acee;
+}
 #header-title .my-socials li a {
   -webkit-border-radius: 30px;
   border-radius: 30px;
