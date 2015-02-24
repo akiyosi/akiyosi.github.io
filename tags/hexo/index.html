@@ -84,9 +84,22 @@
        
      </span>
     </nav>
-
-  </div>
-  <div class="site-nav" style="display: none;">
+   <nav id="sub-nav">
+     
+     <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+   </nav>
+   <div id="search-form-wrap">
+     <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+       <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+       <input type="submit" value="" class="search-form-submit">
+       <input name=tn type=hidden value="bds">
+       <input name=cl type=hidden value="3">
+       <input name=ct type=hidden value="2097152">
+       <input type="hidden" name="si" value="akiyosi.github.io">
+       </form>
+   </div>
+   </div>
+   <div class="site-nav" style="display: none;">
     <ul>
     
         <li><a href="/">home</a></li>
@@ -150,7 +163,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://akiyosi.github.io/2015/02/24/hexo-freq-socialicons/" data-id="8p0q1mozy49q8mma" class="article-share-link">Share</a>
+        <a data-url="http://akiyosi.github.io/2015/02/24/hexo-freq-socialicons/" data-id="c1n0bg8apouynith" class="article-share-link">Share</a>
       
 
       
@@ -165,61 +178,10 @@
 
 
   
-    <article id="post-nodebrewでnode-jsとhexoで書くブログ環境を構築した" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/11/20/nodebrewでnode-jsとhexoで書くブログ環境を構築した/" class="article-date">
-  <time datetime="2014-11-19T15:04:35.000Z" itemprop="datePublished">Nov 20 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/20/nodebrewでnode-jsとhexoで書くブログ環境を構築した/">nodebrewでNode.jsとhexoで書くブログ環境を構築したメモ</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>nvm は vimshell 上でうまく動かなかった。<br>vimshell で hexo コマンド を使いたかったので nodebrew を導入する。</p>
-<h3 id="nodebrew_をインストール">nodebrew をインストール</h3>
-<p>ターミナルで次のコマンドを実行する。</p>
-<figure class="highlight command"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -L git.io/nodebrew | <span class="keyword">perl</span> - setup</div></pre></td></tr></table></figure>
-
-<p>ここからは vimshell を使う。</p>
-<h3 id="Node_をインストール">Node をインストール</h3>
-<figure class="highlight command"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vimshell% nodebrew install-binary stable</div><div class="line"><span class="attribute">fetch</span>: <span class="attribute">http</span>:<span class="regexp">//</span>nodejs.org/dist/v0<span class="number">.10</span><span class="number">.33</span>/node-v0<span class="number">.10</span><span class="number">.33</span>-darwin-x64.tar.gz</div><div class="line">!!!<span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">### 100.0%!!!</span></div><div class="line">Install successful</div></pre></td></tr></table></figure>
-
-<h1 id="_"> </h1>
-<h3 id="hexo_をインストール">hexo をインストール</h3>
-<figure class="highlight command"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="input"><span class="prompt">vimshell% nodebrew use v0.10</span></span></div><div class="line">use v0.10.33</div><div class="line">vimshell% npm install hexo -g</div><div class="line"> </div><div class="line">&gt; fsevents<span class="variable">@0</span>.<span class="number">2.0</span> install /<span class="constant">Users</span>/akiyosi/.nodebrew/current/lib/node_modules/hexo/node_modules/chokidar/node_modules/fsevents</div><div class="line"><span class="input"><span class="prompt">&gt; node-gyp rebuild</span></span></div><div class="line"></div><div class="line">-  CXX(target) Release/obj.target/fse/fsevents.o</div><div class="line">  SOLINK_MODULE(target) Release/fse.node</div><div class="line">  SOLINK_MODULE(target) Release/fse.node: Finished</div><div class="line">/Users/akiyosi/.nodebrew/current/bin/hexo -&gt; /<span class="constant">Users</span>/akiyosi/.nodebrew/current/lib/node_modules/hexo/bin/hexo</div><div class="line">hexo<span class="variable">@2</span>.<span class="number">8.3</span> /<span class="constant">Users</span>/akiyosi/.nodebrew/current/lib/node_modules/hexo</div><div class="line">├── strip-indent<span class="variable">@0</span>.<span class="number">1.3</span></div><div class="line">├── hexo-front-matter<span class="variable">@0</span>.<span class="number">0</span>.<span class="number">4</span></div><div class="line">├── sprintf-js<span class="variable">@0</span>.<span class="number">0</span>.<span class="number">7</span></div><div class="line">├── colors<span class="variable">@0</span>.<span class="number">6.2</span></div><div class="line">├── graceful-fs<span class="variable">@3</span>.<span class="number">0</span>.<span class="number">4</span></div><div class="line">├── mime<span class="variable">@1</span>.<span class="number">2.11</span></div><div class="line">├── minimist<span class="variable">@0</span>.<span class="number">2.0</span></div><div class="line">├── async<span class="variable">@0</span>.<span class="number">9.0</span></div><div class="line">├── warehouse<span class="variable">@0</span>.<span class="number">2.2</span> (async<span class="variable">@0</span>.<span class="number">7.0</span>)</div><div class="line">├── highlight.js<span class="variable">@8</span>.<span class="number">1.0</span></div><div class="line">├── lodash<span class="variable">@2</span>.<span class="number">4.1</span></div><div class="line">├── moment<span class="variable">@2</span>.<span class="number">8.4</span></div><div class="line">├── morgan<span class="variable">@1</span>.<span class="number">5.0</span> (basic-auth<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">0</span>, depd<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">0</span>, on-finished<span class="variable">@2</span>.<span class="number">1.1</span>, debug<span class="variable">@2</span>.<span class="number">1.0</span>)</div><div class="line">├── connect<span class="variable">@3</span>.<span class="number">3.3</span> (utils-merge<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">0</span>, parseurl<span class="variable">@1</span>.<span class="number">3.0</span>, debug<span class="variable">@2</span>.<span class="number">1.0</span>, finalhandler<span class="variable">@0</span>.<span class="number">3.2</span>)</div><div class="line">├── serve-static<span class="variable">@1</span>.<span class="number">7.1</span> (utils-merge<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">0</span>, escape-html<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">1</span>, parseurl<span class="variable">@1</span>.<span class="number">3.0</span>, send<span class="variable">@0</span>.<span class="number">10.1</span>)</div><div class="line">├── compression<span class="variable">@1</span>.<span class="number">2.0</span> (on-headers<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">0</span>, vary<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">0</span>, bytes<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">0</span>, debug<span class="variable">@2</span>.<span class="number">1.0</span>, compressible<span class="variable">@2</span>.<span class="number">0</span>.<span class="number">1</span>, accepts<span class="variable">@1</span>.<span class="number">1.3</span>)</div><div class="line">├── swig<span class="variable">@1</span>.<span class="number">4.1</span> (optimist<span class="variable">@0</span>.<span class="number">6.1</span>, uglify-js<span class="variable">@2</span>.<span class="number">4.15</span>)</div><div class="line">├── js-yaml<span class="variable">@3</span>.<span class="number">2.3</span> (esprima<span class="variable">@1</span>.<span class="number">0</span>.<span class="number">4</span>, argparse<span class="variable">@0</span>.<span class="number">1.15</span>)</div><div class="line">├── cheerio<span class="variable">@0</span>.<span class="number">17.0</span> (entities<span class="variable">@1</span>.<span class="number">1.1</span>, dom-serializer<span class="variable">@0</span>.<span class="number">0</span>.<span class="number">1</span>, <span class="constant">CSSselect</span><span class="variable">@0</span>.<span class="number">4.1</span>, htmlparser2<span class="variable">@3</span>.<span class="number">7.3</span>)</div><div class="line">└── chokidar<span class="variable">@0</span>.<span class="number">8.2</span> (recursive-readdir<span class="variable">@0</span>.<span class="number">0</span>.<span class="number">2</span>, fsevents<span class="variable">@0</span>.<span class="number">2.0</span>)</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://akiyosi.github.io/2014/11/20/nodebrewでnode-jsとhexoで書くブログ環境を構築した/" data-id="9nkpwk9x1qmnjfq7" class="article-share-link">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/tags/hexo/page/2/">2</a><a class="extend next" rel="next" href="/tags/hexo/page/2/">Next</a>
+    </nav>
   
 </section>
         
