@@ -142,14 +142,13 @@
 <p>今回、テーマ変更にあたって、画像のうち、メールアイコンをツイッターアイコンに変えたいと思い、ソースを調べた。するとだいたいこんな感じ。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"my-socials"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"github"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">href</span>=<span class="value">"https://github.com/***"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-github"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"email"</span> <span class="attribute">title</span>=<span class="value">"Email Me"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">href</span>=<span class="value">"mailto: ***"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-envelope"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></td></tr></table></figure>
 
-<p>最近のブラウザは要素解析機能があって便利だなー、さてさて、とか思っていて、徐々に焦り始める。</p>
+<p>最近のブラウザは要素解析機能があって便利だなー、と思いつつ調べていて徐々に焦り始める。</p>
 <ul>
 <li>んー・・・あれ？画像ないぞ。。ははーん、CSSに埋め込んでるやつね。どれどれ、、</li>
 <li>CSSにもないぞ・・・？！　選択する要素間違えてるかな〜、、いや、間違えてない・・・</li>
 </ul>
 <p>散々CSSとHTMLとcloneしたテーマのリポジトリ内調べて、どうにも該当する画像が見つからなかったところで、まさかな、と思ってた可能性だけが残る。・・・これ特殊文字フォント？？</p>
-<p>調べてみると、そのまさかであった。Font Awesome という、素晴らしいフォントが使われていたことが判明。<br>使い方は簡単で、</p>
-<p>font-awesome.css をHTMLソース内にリンクして、使いたいフォントの文字のコードを調べ、以下のように設置する。</p>
+<p>調べてみると、そのまさかであった。Font Awesome という、素晴らしいフォントが使われていたことが判明。使い方は簡単で、font-awesome.css をHTMLソース内にリンクして、使いたいフォントの文字のコードを調べ、以下のように設置する。</p>
 <figure class="highlight font-awesome"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-github"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>まさに要素解析で行き当たったソースのそれであった。</p>
@@ -164,7 +163,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://akiyosi.github.io/2015/02/24/hexo-freq-socialicons/" data-id="kvk2ukmboizgldig" class="article-share-link">Share</a>
+        <a data-url="http://akiyosi.github.io/2015/02/24/hexo-freq-socialicons/" data-id="c1n0bg8apouynith" class="article-share-link">Share</a>
       
 
       
