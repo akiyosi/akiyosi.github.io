@@ -113,10 +113,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hexo-freq-socialicons" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-vimshell-key-mapping" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/02/24/hexo-freq-socialicons/" class="article-date">
-  <time datetime="2015-02-24T11:38:49.000Z" itemprop="datePublished">Feb 24 2015</time>
+    <a href="/2015/02/25/vimshell-key-mapping/" class="article-date">
+  <time datetime="2015-02-25T12:57:26.000Z" itemprop="datePublished">Feb 25 2015</time>
 </a>
     
   </div>
@@ -127,7 +127,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/02/24/hexo-freq-socialicons/">hexoのthemeでよく目にするアイコン</a>
+      <a class="article-title" href="/2015/02/25/vimshell-key-mapping/">vimshell のデフォルトキーマッピング</a>
     </h1>
   
 
@@ -135,41 +135,89 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>hexoで作ったこのブログのテーマを色々探していると下のようなアイコンをよく目にした。</p>
-<p><img src="/2015/02/24/hexo-freq-socialicons/social-icons.png" alt="" title="hexo-themeでよく目にするアイコン"></p>
-<p>hexoのテーマは中国人の方が作ったものが多く、上記に加え weibo とかいう謎サービスのアイコンも陳列していることが多い。（ちなみに検索バーもあっち系の検索サイトになっていたので Google 検索に変更した。）</p>
-<p>今回、テーマ変更にあたって、メールアイコンをツイッターアイコンに変えたいと思いソースを調べた。するとだいたいこんな感じ。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"my-socials"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"github"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">href</span>=<span class="value">"https://github.com/***"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-github"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"email"</span> <span class="attribute">title</span>=<span class="value">"Email Me"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">href</span>=<span class="value">"mailto: ***"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-envelope"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>最近のブラウザは要素解析機能があって便利だなー、と思いつつ調べていて徐々に焦り始める。</p>
-<ul>
-<li>んー・・・あれ？画像ないぞ。。ははーん、CSSに埋め込んでるやつね。どれどれ、、</li>
-<li>CSSにもないぞ・・・？！　選択する要素間違えてるかな〜、、いや、間違えてない・・・</li>
-</ul>
-<p>散々CSSとHTMLとcloneしたテーマのリポジトリ内調べて、どうにも該当する画像が見つからなかったところで、まさかな、と思ってた可能性だけが残る。・・・これ特殊文字フォント？？</p>
-<p>調べてみると、そのまさかであった。Font Awesome という、素晴らしいフォントが使われていたことが判明。使い方は簡単で、font-awesome.css をHTMLソース内にリンクして、使いたいフォントの文字のコードを調べ、以下のように設置する。</p>
-<figure class="highlight font-awesome"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-github"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>まさに要素解析で行き当たったソースのそれであった。</p>
-<p>ここまでくれば後はただの作業である。ツイッターの文字コードを調べて、以下で設置できる模様。</p>
-<figure class="highlight font-awesome"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-twitter"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>ただ、social.ejs を見ると上記リストの””で囲まれる部分は動的に指定してるっぽいので、結局 header.styl に以下を追記するだけであった。</p>
-<figure class="highlight header.styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.twitter</div><div class="line">  background-<span class="keyword">color</span>: <span class="preprocessor">#55acee</span></div></pre></td></tr></table></figure>
-
+        <p>僕は vimshell の操作は基本的にインサートモードで行います。<br>そして今まで矢印キーとTab補完、ヒストリ参照程度しかつかってませんでした。このうち最も面倒な操作はやはり矢印キーでの操作です。vimmer としてこの状況は良くないと思い vimshell のインサートモード時のデフォルトキーマッピングを少し調べました。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key (Insert Mode)</th>
+<th style="text-align:left">操作内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&lt;CR&gt;</td>
+<td style="text-align:left">コマンド実行</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-l&gt;</td>
+<td style="text-align:left">ヒストリ補完</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-p&gt;/&lt;Up&gt;</td>
+<td style="text-align:left">補完メニューを上に移動（戻る）</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-n&gt;/&lt;Down&gt;</td>
+<td style="text-align:left">補完メニューを下へ移動（進む）</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;TAB&gt;</td>
+<td style="text-align:left">補完</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-a&gt;</td>
+<td style="text-align:left">カーソルを行の先頭に移動</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-u&gt;</td>
+<td style="text-align:left">カーソル位置より前の行を削除</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-w&gt;</td>
+<td style="text-align:left">カーソル位置より前のワード（or /）を削除</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-z&gt; (while execute)</td>
+<td style="text-align:left">現在実行中の操作をバックグラウンドで実行</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-z&gt; (other)</td>
+<td style="text-align:left">プロンプト上のコマンドをスタックに格納する。</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-t&gt;</td>
+<td style="text-align:left">（調べたけどよくわからない。。）</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-c&gt;</td>
+<td style="text-align:left">操作キャンセル</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-h&gt;</td>
+<td style="text-align:left">カーソル位置の前の文字を削除</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;BS&gt;</td>
+<td style="text-align:left">カーソル位置の前の文字を削除</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;C-k&gt;</td>
+<td style="text-align:left">カーソル位置より後の行を削除</td>
+</tr>
+</tbody>
+</table>
+<p>個人的に &lt;C-w&gt;, &lt;C-a&gt;,&lt;C-z&gt; あたりはかなり便利だと感じました。これからさらに vimshell での作業が捗りそうです。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://akiyosi.github.io/2015/02/24/hexo-freq-socialicons/" data-id="jvrj7azuzgnkoh18" class="article-share-link">Share</a>
+        <a data-url="http://akiyosi.github.io/2015/02/25/vimshell-key-mapping/" data-id="kmfeizriqdmvs6oq" class="article-share-link">Share</a>
       
 
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
     </footer>
   </div>
   
@@ -179,7 +227,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next</a>
     </nav>
   
 </section>
@@ -202,7 +250,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -212,6 +260,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/02/25/vimshell-key-mapping/">vimshell のデフォルトキーマッピング</a>
+          </li>
         
           <li>
             <a href="/2015/02/24/hexo-freq-socialicons/">hexoのthemeでよく目にするアイコン</a>
