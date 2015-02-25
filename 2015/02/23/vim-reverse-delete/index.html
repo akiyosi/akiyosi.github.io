@@ -158,7 +158,7 @@
 <p>Vim script テクニックバイブルとかウェブの情報とか色々調べたところ、delisさんの以下の記事に行き当たりました。</p>
 <p> <a href="http://deris.hatenablog.jp/entry/20130404/1365086716" target="_blank" rel="external">空行を挿入する+α - derisの日記</a></p>
 <p>後半にドットリピートについて言及されていました。どうやら repeat.vim を使えばできそうです。repeat.vim をインストールし、キーマップを以下のように変更してみました。</p>
-<figure class="highlight key-map2"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nnoremap &lt;<span class="constant">Space</span>&gt;dd <span class="symbol">:&lt;C-u&gt;let</span> scount = <span class="symbol">v:</span>count1 \| call <span class="constant">ReverseDelete</span>(<span class="symbol">v:</span>count1) \| silent! call repeat<span class="comment">#set("&lt;Space&gt;dd", scount)&lt;CR&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight key-map2"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="input"><span class="prompt">nnoremap &lt;silent&gt;</span> &lt;<span class="constant">Space</span>&gt;dd <span class="symbol">:&lt;C-u&gt;let</span> <span class="symbol">b:</span>scount = <span class="symbol">v:</span>count1 \| call <span class="constant">ReverseDelete</span>(<span class="symbol">v:</span>count1) \| silent! call repeat<span class="comment">#set("&lt;Space&gt;dd", b:scount)&lt;CR&gt;</span></span></div></pre></td></tr></table></figure>
 
 <p>動かしてみます！  2&lt;Space&gt;dd とタイプしドットリピートします！</p>
 <p><img src="/2015/02/23/vim-reverse-delete/62365e1eac6d427f5ad377e4139e4a97.gif" alt="" title="vim 逆方向行削除2"></p>
