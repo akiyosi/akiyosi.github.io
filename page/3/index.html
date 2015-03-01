@@ -113,10 +113,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-vim-reverse-delete" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-hexo-freq-socialicons" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/02/23/vim-reverse-delete/" class="article-date">
-  <time datetime="2015-02-23T10:22:55.000Z" itemprop="datePublished">Feb 23 2015</time>
+    <a href="/2015/02/24/hexo-freq-socialicons/" class="article-date">
+  <time datetime="2015-02-24T11:38:49.000Z" itemprop="datePublished">Feb 24 2015</time>
 </a>
     
   </div>
@@ -127,7 +127,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/02/23/vim-reverse-delete/">vimで逆方向の行削除コマンドを作る</a>
+      <a class="article-title" href="/2015/02/24/hexo-freq-socialicons/">hexoのthemeでよく目にするアイコン</a>
     </h1>
   
 
@@ -135,47 +135,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>vimでは ddコマンドで現在オンカーソルな行を削除できます。<br>[count]dd とキータイプすれば現在行含み count下の行まで一気に削除できて便利です。僕は仕事柄膨大な行数のデータファイルを扱うことがままあり、その際に [count]dd はよく使用しているのですが、[count]ddライクに上方向にも行削除もできたらなぁ、とよく考えていました。そこで今回、vimスクリプトの勉強も兼ねて実装にチャレンジしてみました。</p>
-<h3 id="実装">実装</h3>
-<p>ddの動作イメージから、以下のように動くことを目標とします。</p>
+        <p>hexoで作ったこのブログのテーマを色々探していると下のようなアイコンをよく目にした。</p>
+<p><img src="/2015/02/24/hexo-freq-socialicons/social-icons.png" alt="" title="hexo-themeでよく目にするアイコン"></p>
+<p>hexoのテーマは中国人の方が作ったものが多く、上記に加え weibo とかいう謎サービスのアイコンも陳列していることが多い。（ちなみに検索バーもあっち系の検索サイトになっていたので Google 検索に変更した。）</p>
+<p>今回、テーマ変更にあたって、メールアイコンをツイッターアイコンに変えたいと思いソースを調べた。するとだいたいこんな感じ。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"my-socials"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"github"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">href</span>=<span class="value">"https://github.com/***"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-github"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"email"</span> <span class="attribute">title</span>=<span class="value">"Email Me"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">href</span>=<span class="value">"mailto: ***"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-envelope"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>最近のブラウザは要素解析機能があって便利だなー、と思いつつ調べていて徐々に焦り始める。</p>
 <ul>
-<li>「キー」をタイプするとオンカーソル行削除</li>
-<li>[count]「キー」でオンカーソル行含め上方向count行分を削除</li>
-<li>[count] 指定での操作で1行目まで削除したら、それ以上は削除しない。</li>
+<li>んー・・・あれ？画像ないぞ。。ははーん、CSSに埋め込んでるやつね。どれどれ、、</li>
+<li>CSSにもないぞ・・・？！　選択する要素間違えてるかな〜、、いや、間違えてない・・・</li>
 </ul>
-<p>以下のように vimスクリプトを組みました。</p>
-<figure class="highlight vim-script"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>! <span class="title">ReverseDelete</span><span class="params">(count)</span></span></div><div class="line">     let c = v:count1</div><div class="line">     let lnum = line(<span class="string">'.'</span>)</div><div class="line">     <span class="keyword">if</span> c &gt; lnum</div><div class="line"> 	    let c = lnum</div><div class="line">     endif</div><div class="line"></div><div class="line">     execute <span class="string">"normal!"</span> (lnum - c + <span class="number">1</span>) <span class="string">"k"</span></div><div class="line">     execute <span class="string">"normal!"</span> c <span class="string">"dd"</span></div><div class="line"><span class="function"><span class="keyword">endfunction</span></span></div></pre></td></tr></table></figure>
+<p>散々CSSとHTMLとcloneしたテーマのリポジトリ内調べて、どうにも該当する画像が見つからなかったところで、まさかな、と思ってた可能性だけが残る。・・・これ特殊文字フォント？？</p>
+<p>調べてみると、そのまさかであった。Font Awesome という、素晴らしいフォントが使われていたことが判明。使い方は簡単で、font-awesome.css をHTMLソース内にリンクして、使いたいフォントの文字のコードを調べ、以下のように設置する。</p>
+<figure class="highlight font-awesome"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-github"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div></pre></td></tr></table></figure>
 
-<p>この関数を &lt;Space&gt;ddキーにキーマップします。</p>
-<figure class="highlight key-map"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nnoremap &lt;<span class="constant">Space</span>&gt;dd <span class="symbol">:&lt;C-u&gt;call</span> <span class="constant">ReverseDelete</span>(<span class="symbol">v:</span>count1)&lt;<span class="constant">CR</span>&gt;</div></pre></td></tr></table></figure>
+<p>まさに要素解析で行き当たったソースのそれであった。</p>
+<p>ここまでくれば後はただの作業である。ツイッターの文字コードを調べて、以下で設置できる模様。</p>
+<figure class="highlight font-awesome"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-twitter"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span></div></pre></td></tr></table></figure>
 
-<h1 id="_"> </h1>
-<h3 id="動作">動作</h3>
-<p>実際に動かしてみます。4&lt;Space&gt;ddと入力します。</p>
-<p><img src="/2015/02/23/vim-reverse-delete/a5abeeafef5dd37793bcb5cddbad35e9.gif" alt="" title="vim 逆方向行削除"></p>
-<p>動きました！1行目や最終行にオンカーソルな状態でも期待通り動作します！<br>ここで満足しかけたのですが、上記の実装では vimの便利機能であるドット”.”キーによる操作の繰り返しができませんでした。これは不便です。なんとかドットリピート対応したい。</p>
-<h3 id="ドットで繰り返せるようにする">ドットで繰り返せるようにする</h3>
-<p>Vim script テクニックバイブルとかウェブの情報とか色々調べたところ、delisさんの以下の記事に行き当たりました。</p>
-<p> <a href="http://deris.hatenablog.jp/entry/20130404/1365086716" target="_blank" rel="external">空行を挿入する+α - derisの日記</a></p>
-<p>後半にドットリピートについて言及されていました。どうやら repeat.vim を使えばできそうです。repeat.vim をインストールし、キーマップを以下のように変更してみました。</p>
-<figure class="highlight key-map2"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nnoremap &lt;<span class="constant">Space</span>&gt;dd <span class="symbol">:&lt;C-u&gt;let</span> <span class="symbol">b:</span>scount = <span class="symbol">v:</span>count1 \| call <span class="constant">ReverseDelete</span>(<span class="symbol">v:</span>count1) \| silent! call repeat<span class="comment">#set("&lt;Space&gt;dd", b:scount)&lt;CR&gt;</span></div></pre></td></tr></table></figure>
+<p>ただ、social.ejs を見ると上記リストの””で囲まれる部分は動的に指定してるっぽいので、結局 header.styl に以下を追記するだけであった。</p>
+<figure class="highlight header.styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.twitter</div><div class="line">  background-<span class="keyword">color</span>: <span class="preprocessor">#55acee</span></div></pre></td></tr></table></figure>
 
-<p>動かしてみます！  2&lt;Space&gt;dd とタイプしドットリピートします！</p>
-<p><img src="/2015/02/23/vim-reverse-delete/0341dc56ffbfd3eef5ef4af2adfe51ea.gif" alt="" title="vim 逆方向行削除2"></p>
-<p>出来ました！ちゃんと[count]分だけ上方向に行削除できて、ドットで繰り返すことができます！<br>やった！</p>
-<p>今回は初めてvimスクリプトを書いて色々勉強になりました。あと、GIFアニメ付きの記事を投稿するに当たり deris さんのブログにお世話になりっぱなしでした。Gifzo便利。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://akiyosi.github.io/2015/02/23/vim-reverse-delete/" data-id="gasx3dr43ne7grzb" class="article-share-link">Share</a>
+        <a data-url="http://akiyosi.github.io/2015/02/24/hexo-freq-socialicons/" data-id="cgj229ywl8dnj94z" class="article-share-link">Share</a>
       
 
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
     </footer>
   </div>
@@ -186,7 +179,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next</a>
+      <a class="extend prev" rel="prev" href="/page/2/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next</a>
     </nav>
   
 </section>
@@ -200,7 +193,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -209,7 +202,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -219,6 +212,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/03/01/start-vimshell-at-dock/">Mac で VimShell を Dock から起動する</a>
+          </li>
         
           <li>
             <a href="/2015/02/25/vimshell-key-mapping/">vimshell のデフォルトキーマッピング</a>
@@ -234,10 +231,6 @@
         
           <li>
             <a href="/2014/11/20/nodebrewでnode-jsとhexoで書くブログ環境を構築した/">nodebrewでNode.jsとhexoで書くブログ環境を構築したメモ</a>
-          </li>
-        
-          <li>
-            <a href="/2014/11/19/hello-world/">Hello World</a>
           </li>
         
       </ul>
